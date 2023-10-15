@@ -1,6 +1,8 @@
 let convertButton = document.querySelector(".convert-button") // Mapeado o botão
 
-function convertValues(){ // Criando uma função que toda vez que eu clicar no botão, converta os valores.
+let selectedCurrency = document.querySelector(".converted-currency") // Mapeando o botão select para saber qual moeda converter
+
+function convertValues() { // Criando uma função que toda vez que eu clicar no botão, converta os valores.
     const inputCurrencyValue = document.querySelector(".input-values").value // Criando uma variavel para pegar o valor dentro do input
 
     const valueToConvert = document.querySelector(".currencyValuetoCovert") // Valor para converter
@@ -8,20 +10,80 @@ function convertValues(){ // Criando uma função que toda vez que eu clicar no 
     const valueConverted = document.querySelector(".currencyValue") // Valor a ser convertido
 
     const dolarToday = 5.08 // Cotação do dolar
+    const euroToday = 5.31 // Cotação do Euro
+    const libraToday = 6.12 // Cotação da Libra
+    const bitcoinToday = 135633.37 // Cotação do Bitcoin
 
-    const converteValue = inputCurrencyValue / dolarToday // Pegando o valor digitado no input e dividindo pela cotação do dolar
+    // Quando clicar no meu botão, quero verificar o select, se o select estiver selecionado o valor dolar, ele entrará aqui.
+    if (selectedCurrency.value == "dolar") {
+        valueConverted.innerHTML = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD"
+        }).format(inputCurrencyValue / dolarToday) // Pegando o valor digitado no input e dividindo pela cotação do dolar
+    }
 
-    valueToConvert.innerHTML = new Intl.NumberFormat ("pt-BR", {
-        style:"currency",
-        currency:"BRL"
+    // Quando clicar no meu botão, quero verificar o select, se o select estiver selecionado o valor euro, ele entrará aqui.
+    if (selectedCurrency.value == "euro") {
+        valueConverted.innerHTML = new Intl.NumberFormat("de-DE", {
+            style: "currency",
+            currency: "EUR"
+        }).format(inputCurrencyValue / euroToday)
+    }
+
+    if(selectedCurrency.value == "libra") {
+        valueConverted.innerHTML = new Intl.NumberFormat("en-GB", {
+            style: "currency",
+            currency: "GBP"
+        }).format(inputCurrencyValue / libraToday)
+    }
+
+    if(selectedCurrency.value == "bitcoin") {
+        valueConverted.innerHTML = new Intl.NumberFormat("de-DE", {
+            style: "currency",
+            currency: "BTC"
+        }).format(inputCurrencyValue / bitcoinToday)
+    }
+
+    valueToConvert.innerHTML = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL"
     }).format(inputCurrencyValue)
-
-    valueConverted.innerHTML = new Intl.NumberFormat ("en-US", {
-        style:"currency",
-        currency:"USD"
-    }).format(converteValue)
-
 
 }
 
+// Criando uma função, que toda vez que eu trocar de moeda, chame está função.
+function changeCurrency(){
+
+    const currecyName = document.querySelector("#currency-name")
+
+    const currencyImagem = document.querySelector(".currency-imagen")
+
+    if (selectedCurrency.value == "dolar"){
+        // Trocando o nome para dolar
+        currecyName.innerHTML = "Dólar americano"
+        // Trocando o a imagem para dollar
+        currencyImagem.src = './assets/Dollar.png'
+    }
+
+    if (selectedCurrency.value == "euro"){
+        // Trocando o nome para euro
+        currecyName.innerHTML = "Euro"
+        // Trocando o a imagem para euro
+        currencyImagem.src = './assets/Euro.png'
+    }
+
+    if (selectedCurrency.value == "libra"){
+        currecyName.innerHTML = "Libra Esterlina"
+        currencyImagem.src = "./assets/libra.png"
+    }
+
+    if (selectedCurrency.value == "bitcoin"){
+        currecyName.innerHTML = "Bitcoin"
+        currencyImagem.src = './assets/bitcoin.png'
+    }
+
+    convertValues() // Chamando a função para converter os valores após a troca de moedas
+}
+
+selectedCurrency.addEventListener("change", changeCurrency) // Pegando o select e ficar atento sempre que ele trocar
 convertButton.addEventListener("click", convertValues) // Pegando o click do nosso botão

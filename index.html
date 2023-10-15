@@ -28,11 +28,13 @@
 
         <label>
             Converter <b>para</b>
-            <select>
-                <option>US$ Dólar americano</option>
-                <option>€ Euro</option>
-                <option>£ Libra esterlina</option>
-                <option>₿ Bitcoin</option>
+
+            <select class="converted-currency">
+                <option value="dolar">US$ Dólar americano</option> <!-- Colocando o value, sempre que eu for pegar está opção, ao invés de vir US$ Dólar americano, vem apenas o que escrevi dentro do value -->
+
+                <option value="euro">€ Euro</option>
+                <option value="libra">£ Libra esterlina</option>
+                <option value="bitcoin">₿ Bitcoin</option>
                 <option>R$ Real Brasileiro</option>
                 
             </select>
@@ -53,8 +55,8 @@
             </div>
             <img class="arrow" src="./assets/Arrow.png" alt="seta">
             <div class="currencyCountry">
-                <img src="./assets/Dollar.png" alt="logo-dollar">
-                <p class="currency">Dólar</p>
+                <img class="currency-imagen" src="./assets/Dollar.png" alt="logo-dollar">
+                <p class="currency" id="currency-name">Dólar americano</p>
                 <p class="currencyValue">US$ 0.0</p>
             </div>
         </section>
