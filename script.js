@@ -1,5 +1,7 @@
 let convertButton = document.querySelector(".convert-button") // Mapeado o botão
 
+let currentySelect = document.querySelector(".convert-currency")
+
 let selectedCurrency = document.querySelector(".converted-currency") // Mapeando o botão select para saber qual moeda converter
 
 function convertValues() { // Criando uma função que toda vez que eu clicar no botão, converta os valores.
@@ -13,6 +15,8 @@ function convertValues() { // Criando uma função que toda vez que eu clicar no
     const euroToday = 5.31 // Cotação do Euro
     const libraToday = 6.12 // Cotação da Libra
     const bitcoinToday = 135633.37 // Cotação do Bitcoin
+
+
 
     // Quando clicar no meu botão, quero verificar o select, se o select estiver selecionado o valor dolar, ele entrará aqui.
     if (selectedCurrency.value == "dolar") {
@@ -44,6 +48,13 @@ function convertValues() { // Criando uma função que toda vez que eu clicar no
         }).format(inputCurrencyValue / bitcoinToday)
     }
 
+    if(selectedCurrency.value == "real") {
+        valueConverted.innerHTML = new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        }).format(inputCurrencyValue)
+    }
+
     valueToConvert.innerHTML = new Intl.NumberFormat("pt-BR", {
         style: "currency",
         currency: "BRL"
@@ -56,7 +67,7 @@ function changeCurrency(){
 
     const currecyName = document.querySelector("#currency-name")
 
-    const currencyImagem = document.querySelector(".currency-imagen")
+    const currencyImagem = document.querySelector(".currency-imagen")    
 
     if (selectedCurrency.value == "dolar"){
         // Trocando o nome para dolar
@@ -82,8 +93,49 @@ function changeCurrency(){
         currencyImagem.src = './assets/bitcoin.png'
     }
 
+    if (selectedCurrency.value == "real"){
+        currecyName.innerHTML = "Real Brasileiro"
+        currencyImagem.src = './assets/Real.png'
+    }
+
     convertValues() // Chamando a função para converter os valores após a troca de moedas
 }
 
+
+    function changeCurrencyDe(){
+
+        const currencyNameDe = document.querySelector("#currency-name-de")
+
+        const currencyImagemDe = document.querySelector(".currency-imagen-de")
+    
+
+    if (currentySelect.value == "dolar"){
+        // Trocando o nome para dolar
+        currencyNameDe.innerHTML = "Dólar americano"
+        // Trocando o a imagem para dollar
+        currencyImagemDe.src = './assets/Dollar.png'
+    }
+
+    if (currentySelect.value == "euro"){
+        currencyNameDe.innerHTML = "Euro"
+        currencyImagemDe.src = './assets/Euro.png'
+    }
+    
+    if (currentySelect.value == "libra"){
+        currencyNameDe.innerHTML = "Libra Esterlina"
+        currencyImagemDe.src = './assets/libra.png'
+    }
+
+    if (currentySelect.value == "bitcoin"){
+        currencyNameDe.innerHTML = "Bitcoin"
+        currencyImagemDe.src = './assets/bitcoin.png'
+    }
+
+    changeCurrencyDe()
+
+    }
+    
+
+currentySelect.addEventListener("change", changeCurrencyDe )
 selectedCurrency.addEventListener("change", changeCurrency) // Pegando o select e ficar atento sempre que ele trocar
 convertButton.addEventListener("click", convertValues) // Pegando o click do nosso botão
