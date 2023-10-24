@@ -1,141 +1,419 @@
-let convertButton = document.querySelector(".convert-button") // Mapeado o botão
+// 1º  Mapeando o button
+const convertButton = document.querySelector(".convert-button")
 
-let currentySelect = document.querySelector(".convert-currency")
+// 9º Mapeando meu select para saber quando ele for trocar de moeda
+const convertedCurrencyTo = document.querySelector(".converted-currency-to")
 
-let selectedCurrency = document.querySelector(".converted-currency") // Mapeando o botão select para saber qual moeda converter
+const convertCurrencyFrom = document.querySelector(".convert-currency-from")
 
-function convertValues() { // Criando uma função que toda vez que eu clicar no botão, converta os valores.
-    const inputCurrencyValue = document.querySelector(".input-values").value // Criando uma variavel para pegar o valor dentro do input
+// Troca dos nomes e das bandeiras das moedas que iram trocar
 
-    const valueToConvert = document.querySelector(".currencyValuetoCovert") // Valor para converter
+function flagChangeFrom () {
 
-    const valueConverted = document.querySelector(".currencyValue") // Valor a ser convertido
+    const currencyNameFrom = document.getElementById("currencyNameFrom")
 
-    const dolarToday = 5.08 // Cotação do dolar
-    const euroToday = 5.31 // Cotação do Euro
-    const libraToday = 6.12 // Cotação da Libra
-    const bitcoinToday = 135633.37 // Cotação do Bitcoin
+    const currencyImagenFrom = document.querySelector(".currency-imagen-from")
 
 
-
-    // Quando clicar no meu botão, quero verificar o select, se o select estiver selecionado o valor dolar, ele entrará aqui.
-    if (selectedCurrency.value == "dolar") {
-        valueConverted.innerHTML = new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD"
-        }).format(inputCurrencyValue / dolarToday) // Pegando o valor digitado no input e dividindo pela cotação do dolar
+    if(convertCurrencyFrom.value == "real") {
+        currencyNameFrom.innerHTML = "Real brasileiro"
+        currencyImagenFrom.src = "./assets/Real.png"
     }
 
-    // Quando clicar no meu botão, quero verificar o select, se o select estiver selecionado o valor euro, ele entrará aqui.
-    if (selectedCurrency.value == "euro") {
-        valueConverted.innerHTML = new Intl.NumberFormat("de-DE", {
-            style: "currency",
-            currency: "EUR"
-        }).format(inputCurrencyValue / euroToday)
+    if(convertCurrencyFrom.value == "dolar") {
+        currencyNameFrom.innerHTML = "Dólar americano"
+        currencyImagenFrom.src = "./assets/Dollar.png"
     }
 
-    if(selectedCurrency.value == "libra") {
-        valueConverted.innerHTML = new Intl.NumberFormat("en-GB", {
-            style: "currency",
-            currency: "GBP"
-        }).format(inputCurrencyValue / libraToday)
+    if(convertCurrencyFrom.value == "euro") {
+        currencyNameFrom.innerHTML = "Euro"
+        currencyImagenFrom.src = "./assets/Euro.png"
     }
 
-    if(selectedCurrency.value == "bitcoin") {
-        valueConverted.innerHTML = new Intl.NumberFormat("de-DE", {
-            style: "currency",
-            currency: "BTC"
-        }).format(inputCurrencyValue / bitcoinToday)
+    if(convertCurrencyFrom.value == "libra") {
+        currencyNameFrom.innerHTML = "Libra esterlina"
+        currencyImagenFrom.src = "./assets/libra.png"
     }
 
-    if(selectedCurrency.value == "real") {
-        valueConverted.innerHTML = new Intl.NumberFormat("pt-BR", {
-            style: "currency",
-            currency: "BRL"
-        }).format(inputCurrencyValue)
+    if(convertCurrencyFrom.value == "bitcoin") {
+        currencyNameFrom.innerHTML = "Bitcoin"
+        currencyImagenFrom.src = "./assets/bitcoin.png"
     }
 
-    valueToConvert.innerHTML = new Intl.NumberFormat("pt-BR", {
+    convertValue ()
+}
+
+
+// Troca dos nomes e das bandeiras das moedas trocadas
+
+function flagChangeTo () {
+
+    const currencyNameTo = document.getElementById("currencyNameTo")
+
+    const currencyImagenTo = document.querySelector(".currency-imagen-to")
+
+
+    if(convertedCurrencyTo.value == "dolar") {
+        currencyNameTo.innerHTML = "Dólar americano"
+        currencyImagenTo.src = "./assets/Dollar.png"
+    }
+
+    if(convertedCurrencyTo.value == "euro") {
+        currencyNameTo.innerHTML = "Euro"
+        currencyImagenTo.src = "./assets/Euro.png"
+    }
+
+    if(convertedCurrencyTo.value == "libra") {
+        currencyNameTo.innerHTML = "Libra esterlina"
+        currencyImagenTo.src = "./assets/libra.png"
+    }
+
+    if(convertedCurrencyTo.value == "bitcoin") {
+        currencyNameTo.innerHTML = "Bitcoin"
+        currencyImagenTo.src = "./assets/bitcoin.png"
+    }
+
+    if(convertedCurrencyTo.value == "real") {
+        currencyNameTo.innerHTML = "Real brasileiro"
+        currencyImagenTo.src = "./assets/Real.png"
+    }
+
+    convertValue ()
+}
+
+
+// 3º Criando uma função para que possa converter o valor, assim que o button for clicado
+function convertValue () {
+    const inputValues = document.querySelector(".input-values").value // 4º Criamos uma variável para pegarmos o valor dentro do input
+
+    const currencyValuetoCovertFrom = document.querySelector(".currencyValuetoCovertFrom") // 6º criamos a variável para o valor que será convertido
+
+    const currencyValueTo = document.querySelector(".currencyValueTo") // 7º Criamos uma variável para o valor que será convertido
+
+    const dolarToday = 5.01 // 5º Criamos uma variável para pegar o dolar
+    const euroToday = 5.36
+    const libraToday = 6.12
+    const bitcoinToday = 154561.63
+
+    // 9º Mapeando meu select para saber quando ele for trocar de moeda
+const convertedCurrencyTo = document.querySelector(".converted-currency-to")
+
+const convertCurrencyFrom = document.querySelector(".convert-currency-from")
+
+if (convertCurrencyFrom.value == 'real' && convertedCurrencyTo.value == 'dolar') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("pt-BR", {
         style: "currency",
         currency: "BRL"
-    }).format(inputCurrencyValue)
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
+    }).format(inputValues / dolarToday)
+}
+
+if (convertCurrencyFrom.value == 'real' && convertedCurrencyTo.value == 'euro') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "EUR"
+    }).format(inputValues / euroToday)
+}
+
+if (convertCurrencyFrom.value == 'real' && convertedCurrencyTo.value == 'libra') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("en-GB", {
+        style: "currency",
+        currency: "GBP"
+    }).format(inputValues / libraToday)
+}
+
+if (convertCurrencyFrom.value == 'real' && convertedCurrencyTo.value == 'bitcoin') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "BTC"
+    }).format(inputValues / bitcoinToday)
+}
+
+if (convertCurrencyFrom.value == 'real' && convertedCurrencyTo.value == 'real') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    }).format(inputValues)
+}
+
+if (convertCurrencyFrom.value == 'dolar' && convertedCurrencyTo.value == 'dolar') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
+    }).format(inputValues)
+}
+
+if (convertCurrencyFrom.value == 'dolar' && convertedCurrencyTo.value == 'euro') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "EUR"
+    }).format((inputValues * dolarToday) / euroToday)
+}
+
+if (convertCurrencyFrom.value == 'dolar' && convertedCurrencyTo.value == 'libra') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("en-GB", {
+        style: "currency",
+        currency: "GBP"
+    }).format((inputValues * dolarToday) / libraToday)
+}
+
+if (convertCurrencyFrom.value == 'dolar' && convertedCurrencyTo.value == 'bitcoin') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "BTC"
+    }).format((inputValues * dolarToday) / bitcoinToday)
+}
+
+if (convertCurrencyFrom.value == 'dolar' && convertedCurrencyTo.value == 'real') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    }).format(inputValues * dolarToday)
+}
+
+if (convertCurrencyFrom.value == 'euro' && convertedCurrencyTo.value == 'dolar') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "EUR"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
+    }).format((inputValues * euroToday) / dolarToday)
+}
+
+if (convertCurrencyFrom.value == 'euro' && convertedCurrencyTo.value == 'euro') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "EUR"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "EUR"
+    }).format(inputValues)
+}
+
+if (convertCurrencyFrom.value == 'euro' && convertedCurrencyTo.value == 'libra') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "EUR"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("en-GB", {
+        style: "currency",
+        currency: "GBP"
+    }).format((inputValues * euroToday) / libraToday)
 
 }
 
-// Criando uma função, que toda vez que eu trocar de moeda, chame está função.
-function changeCurrency(){
+if (convertCurrencyFrom.value == 'euro' && convertedCurrencyTo.value == 'bitcoin') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "EUR"
+    }).format(inputValues)
 
-    const currecyName = document.querySelector("#currency-name")
+    currencyValueTo.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "BTC"
+    }).format((inputValues * euroToday) / bitcoinToday)
 
-    const currencyImagem = document.querySelector(".currency-imagen")    
-
-    if (selectedCurrency.value == "dolar"){
-        // Trocando o nome para dolar
-        currecyName.innerHTML = "Dólar americano"
-        // Trocando o a imagem para dollar
-        currencyImagem.src = './assets/Dollar.png'
-    }
-
-    if (selectedCurrency.value == "euro"){
-        // Trocando o nome para euro
-        currecyName.innerHTML = "Euro"
-        // Trocando o a imagem para euro
-        currencyImagem.src = './assets/Euro.png'
-    }
-
-    if (selectedCurrency.value == "libra"){
-        currecyName.innerHTML = "Libra Esterlina"
-        currencyImagem.src = "./assets/libra.png"
-    }
-
-    if (selectedCurrency.value == "bitcoin"){
-        currecyName.innerHTML = "Bitcoin"
-        currencyImagem.src = './assets/bitcoin.png'
-    }
-
-    if (selectedCurrency.value == "real"){
-        currecyName.innerHTML = "Real Brasileiro"
-        currencyImagem.src = './assets/Real.png'
-    }
-
-    convertValues() // Chamando a função para converter os valores após a troca de moedas
 }
 
+if (convertCurrencyFrom.value == 'euro' && convertedCurrencyTo.value == 'real') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "EUR"
+    }).format(inputValues)
 
-    function changeCurrencyDe(){
+    currencyValueTo.innerHTML = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    }).format(inputValues * euroToday)
 
-        const currencyNameDe = document.querySelector("#currency-name-de")
+}
 
-        const currencyImagemDe = document.querySelector(".currency-imagen-de")
-    
+if (convertCurrencyFrom.value == 'libra' && convertedCurrencyTo.value == 'dolar') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("en-GB", {
+        style: "currency",
+        currency: "GBP"
+    }).format(inputValues)
 
-    if (currentySelect.value == "dolar"){
-        // Trocando o nome para dolar
-        currencyNameDe.innerHTML = "Dólar americano"
-        // Trocando o a imagem para dollar
-        currencyImagemDe.src = './assets/Dollar.png'
-    }
+    currencyValueTo.innerHTML = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
+    }).format((inputValues * libraToday) / dolarToday)
 
-    if (currentySelect.value == "euro"){
-        currencyNameDe.innerHTML = "Euro"
-        currencyImagemDe.src = './assets/Euro.png'
-    }
-    
-    if (currentySelect.value == "libra"){
-        currencyNameDe.innerHTML = "Libra Esterlina"
-        currencyImagemDe.src = './assets/libra.png'
-    }
+}
 
-    if (currentySelect.value == "bitcoin"){
-        currencyNameDe.innerHTML = "Bitcoin"
-        currencyImagemDe.src = './assets/bitcoin.png'
-    }
+if (convertCurrencyFrom.value == 'libra' && convertedCurrencyTo.value == 'euro') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("en-GB", {
+        style: "currency",
+        currency: "GBP"
+    }).format(inputValues)
 
-    changeCurrencyDe()
+    currencyValueTo.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "EUR"
+    }).format((inputValues * libraToday) / euroToday)
 
-    }
-    
+}
 
-currentySelect.addEventListener("change", changeCurrencyDe )
-selectedCurrency.addEventListener("change", changeCurrency) // Pegando o select e ficar atento sempre que ele trocar
-convertButton.addEventListener("click", convertValues) // Pegando o click do nosso botão
+if (convertCurrencyFrom.value == 'libra' && convertedCurrencyTo.value == 'libra') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("en-GB", {
+        style: "currency",
+        currency: "GBP"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("en-GB", {
+        style: "currency",
+        currency: "GBP"
+    }).format(inputValues)
+
+}
+
+if (convertCurrencyFrom.value == 'libra' && convertedCurrencyTo.value == 'bitcoin') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("en-GB", {
+        style: "currency",
+        currency: "GBP"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "BTC"
+    }).format((inputValues * libraToday) / bitcoinToday)
+
+}
+
+if (convertCurrencyFrom.value == 'libra' && convertedCurrencyTo.value == 'real') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("en-GB", {
+        style: "currency",
+        currency: "GBP"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    }).format(inputValues * libraToday)
+
+}
+
+if (convertCurrencyFrom.value == 'bitcoin' && convertedCurrencyTo.value == 'dolar') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "BTC"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
+    }).format((inputValues * bitcoinToday) / dolarToday)
+
+}
+
+if (convertCurrencyFrom.value == 'bitcoin' && convertedCurrencyTo.value == 'euro') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "BTC"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "EUR"
+    }).format((inputValues * bitcoinToday) / euroToday)
+
+}
+
+if (convertCurrencyFrom.value == 'bitcoin' && convertedCurrencyTo.value == 'libra') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "BTC"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("en-GB", {
+        style: "currency",
+        currency: "GBP"
+    }).format((inputValues * bitcoinToday) / libraToday)
+
+}
+
+if (convertCurrencyFrom.value == 'bitcoin' && convertedCurrencyTo.value == 'bitcoin') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "BTC"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "BTC"
+    }).format(inputValues)
+
+}
+
+if (convertCurrencyFrom.value == 'bitcoin' && convertedCurrencyTo.value == 'real') {
+    currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "BTC"
+    }).format(inputValues)
+
+    currencyValueTo.innerHTML = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    }).format(inputValues * bitcoinToday)
+
+}
+
+}
+convertButton.addEventListener("click", convertValue) // 2º Craindo um ouvinte para que quando o botão for clicado, ele traga o valor
+convertCurrencyFrom.addEventListener("change", flagChangeFrom)
+convertedCurrencyTo.addEventListener("change", flagChangeTo)

@@ -12,13 +12,15 @@
 </head>
 
 <body>
-    <img class="logo" src="./assets/logo.gif" alt="logo-do-conversor">
+    <img class="logo" src="./assets/moedas.png" alt="logo-do-conversor">
 
-<main>
+    
+    <main>
+       <div> <h2>Conversor de Moedas </h2></div>
         <label>
             Conversor <b>de</b>
-            <select class="convert-currency">
-                <option value="real">R$ Real Brasileiro</option>
+            <select class="convert-currency-from">
+                <option value="real">R$ Real brasileiro</option>
                 <option value="dolar">US$ Dólar americano</option>
                 <option value="euro">€ Euro</option>
                 <option value="libra">£ Libra esterlina</option>
@@ -29,14 +31,15 @@
         <label>
             Converter <b>para</b>
 
-            <select class="converted-currency">
-                <option value="dolar">US$ Dólar americano</option> <!-- Colocando o value, sempre que eu for pegar está opção, ao invés de vir US$ Dólar americano, vem apenas o que escrevi dentro do value -->
+            <select class="converted-currency-to">
+                <option value="dolar">US$ Dólar americano</option>
+                <!-- Colocando o value, sempre que eu for pegar está opção, ao invés de vir US$ Dólar americano, vem apenas o que escrevi dentro do value -->
 
                 <option value="euro">€ Euro</option>
                 <option value="libra">£ Libra esterlina</option>
                 <option value="bitcoin">₿ Bitcoin</option>
-                <option value="real">R$ Real Brasileiro</option>
-                
+                <option value="real">R$ Real brasileiro</option>
+
             </select>
         </label>
 
@@ -48,16 +51,16 @@
         <button class="convert-button">Converter</button>
 
         <section>
-            <div class="currencyCountry" >
-                <img class="currency-imagen-de" src="./assets/Real.png" alt="logo-real">
-                <p class="currency" id="currency-name-de">Real</p>
-                <p class="currencyValuetoCovert">R$ 0,00</p>
-            </div>
-            <img class="arrow" src="./assets/Arrow.png" alt="seta">
             <div class="currencyCountry">
-                <img class="currency-imagen" src="./assets/Dollar.png" alt="logo-dollar">
-                <p class="currency" id="currency-name">Dólar americano</p>
-                <p class="currencyValue">US$ 0.0</p>
+                <img class="currency-imagen-from" src="./assets/Real.png" alt="logo-real">
+                <p class="currency" id="currencyNameFrom">Real</p>
+                <p class="currencyValuetoCovertFrom">R$ 0,00</p>
+            </div>
+            <img class="arrow" src="./assets/flechaparabaixo.png" alt="seta">
+            <div class="currencyCountry">
+                <img class="currency-imagen-to" src="./assets/Dollar.png" alt="logo-dollar">
+                <p class="currency" id="currencyNameTo">Dólar americano</p>
+                <p class="currencyValueTo">US$ 0.0</p>
             </div>
         </section>
 
