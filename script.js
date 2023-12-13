@@ -83,22 +83,32 @@ function flagChangeTo () {
 
 
 // 3º Criando uma função para que possa converter o valor, assim que o button for clicado
-function convertValue () {
+ async function convertValue () {
     const inputValues = document.querySelector(".input-values").value // 4º Criamos uma variável para pegarmos o valor dentro do input
 
     const currencyValuetoCovertFrom = document.querySelector(".currencyValuetoCovertFrom") // 6º criamos a variável para o valor que será convertido
 
     const currencyValueTo = document.querySelector(".currencyValueTo") // 7º Criamos uma variável para o valor que será convertido
 
-    const dolarToday = 5.01 // 5º Criamos uma variável para pegar o dolar
-    const euroToday = 5.36
-    const libraToday = 6.12
-    const bitcoinToday = 154561.63
+    // const dolarToday = 5.01 // 5º Criamos uma variável para pegar o dolar
+    // const euroToday = 5.36
+    // const libraToday = 6.12
+    // const bitcoinToday = 154561.63
 
     // 9º Mapeando meu select para saber quando ele for trocar de moeda
 const convertedCurrencyTo = document.querySelector(".converted-currency-to")
 
 const convertCurrencyFrom = document.querySelector(".convert-currency-from")
+
+const data = await fetch("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL,GBP-BRL").then(response => response.json())
+
+
+const dolarToday = data.USDBRL.high
+const euroToday = data.EURBRL.high
+const bitcoinToday = data.BTCBRL.high
+const libraToday = data.GBPBRL.high
+
+
 
 if (convertCurrencyFrom.value == 'real' && convertedCurrencyTo.value == 'dolar') {
     currencyValuetoCovertFrom.innerHTML = new Intl.NumberFormat("pt-BR", {
